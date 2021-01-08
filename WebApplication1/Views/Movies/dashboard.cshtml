@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication1.Models.Movie>
+
+@{
+    ViewData["Title"] = "dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Dashboard</h1>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Movie Name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="dashboard" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.MovieName)</a>
+            </th>
+
+            <th>
+                <a asp-action="dashboard" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.ReleaseDate)</a>
+            </th>
+
+            <th>
+                <a asp-action="dashboard" asp-route-sortOrder="@ViewData["TimeSortParm"]">@Html.DisplayNameFor(model => model.Duration)</a>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MovieName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
